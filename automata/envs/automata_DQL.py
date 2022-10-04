@@ -4,7 +4,7 @@ Created on Mon Oct 25 19:03:43 2021
 
 @author: Lucas
 """
-
+#%%
 import gym
 import random
 import os
@@ -13,7 +13,7 @@ import torch as T
 import numpy as np
 import csv
 import pandas as pd
-from DQN import Agent
+from lib.dqn_model import Agent
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -23,7 +23,7 @@ start = time.time()
     
     
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
-os.chdir('C:/Users/Lucas/Google Drive/Pesquisa/TCC/automata_gym_cont/automata/envs')
+os.chdir('/home/kallilzie/automata_gym_cont/automata/envs')
 
 #print('cuda:0' if T.cuda.is_available() else 'cpu')
 
@@ -57,8 +57,9 @@ agent = Agent(gamma=0.99, epsilon=1.0, batch_size=64, n_actions=35,
 cases=9
 mean_reward_episodes = [0 for i in range(cases)]
 
+#%%
 for k in range(cases):
-    with open('C:/Users/Lucas/Google Drive/Pesquisa/TCC/automata_gym_cont/automata/envs/testes_mesa/'+dataname+'/case'+str(k+1)+'.csv', newline='') as csvfile:
+    with open('/home/kallilzie/automata_gym_cont/automata/envs/testes_mesa/'+dataname+'/case'+str(k+1)+'.csv', newline='') as csvfile:
     #with open('C:/Users/Lucas/Google Drive/Pesquisa/TCC/automata_gym_cont/automata/envs/testes/'+dataname+'/case'+str(k+1)+'.csv', newline='') as csvfile:
         data = list(csv.reader(csvfile))
         
@@ -111,7 +112,7 @@ for k in range(cases):
     #info_dql.append((mean_reward_episodes[k], 10*k, "DQL"))    
    
 
-
+#%%
 reward_dataname=directory+dataname+"_reward.csv"
 
 occurrences_dql_dataname=directory+dataname+"_fsDQL.csv"
@@ -173,7 +174,7 @@ plot.set_ylabel("Número de Ocorrências")
 redoRelation = redo.values.tolist()
 dql = dql.values.tolist()
 
-
+#%%
 a=[]
 for i in range(len(redoRelation)):
     for j in range(len(dql)):
@@ -213,3 +214,5 @@ print("Execution time: {}".format(end-start))
 
 
 
+
+# %%

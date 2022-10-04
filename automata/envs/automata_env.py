@@ -167,7 +167,7 @@ class automataEnv(gym.Env):
                
             while(self.transitions[indexPlus][0] == self.actual_state):
                 state_indexes.append(indexPlus)
-                indexPlus-=1
+                indexPlus+=1
             
             return state_indexes
         

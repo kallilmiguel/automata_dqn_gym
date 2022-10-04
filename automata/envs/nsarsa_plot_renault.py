@@ -13,7 +13,7 @@ Created on Tue Sep 15 17:49:07 2020
 
 @author: kallil & lucas
 """
-
+#%%
 import gym
 import random
 import numpy as np
