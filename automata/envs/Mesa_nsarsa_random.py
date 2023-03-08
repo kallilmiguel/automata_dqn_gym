@@ -2,17 +2,10 @@
 import gym
 import random
 import os
-import time
 import torch 
-import torch.optim as optim
-import torch.nn as nn
 import numpy as np
 import csv
-import pandas as pd
-from lib import agent_buffer
-from lib import dqn_model
-import seaborn as sns
-import matplotlib.pyplot as plt
+
 from operator import itemgetter
 import ptan
 from tensorboardX import SummaryWriter
@@ -59,7 +52,7 @@ def parse_args():
     parser.add_argument('--batch_size', type=int, default=128, help="Batch size (use higher if you have enough VRAM)")
     parser.add_argument('--lr', type=float, default=1e-4, help="Learning rate of training")
     parser.add_argument('--sync_target_frames', type=int, default=1e3, help="Number of steps for synchronization between both networks")
-    parser.add_argument('--episodes', type=int, default=1000, help="Learning rate of training")
+    parser.add_argument('--episodes', type=int, default=200, help="Learning rate of training")
     parser.add_argument('--eps_decay', type=int, default=15000)
     parser.add_argument('--gpu', type=int, default=0, help="Specify which GPU to use")
     parser.add_argument('--case', type=int, default=9)
@@ -92,7 +85,7 @@ if __name__ == "__main__":
 
     directory = "action_frequency"
     dataname = "random"
-    writer = SummaryWriter(comment=f"/DQN:dataname={dataname}.{CASE}_n={N_STEPS}_lr={LEARNING_RATE}_gamma={GAMMA}_epsDecay={EPSILON_DECAY_LAST_STEP}")
+    writer = SummaryWriter(comment=f"/NSARSA:dataname={dataname}.{CASE}_n={N_STEPS}_lr={LEARNING_RATE}_gamma={GAMMA}_epsDecay={EPSILON_DECAY_LAST_STEP}")
 
     for scenario in range(1,101):
         
@@ -181,8 +174,8 @@ if __name__ == "__main__":
                     R.append(r_n)
                     total_reward += r_n
                     if(done):
-                        print(f"Episode ended with reward {sum(R)}")
-                        reward_arr[scenario-1] = sum(R)
+                        print(f"Episode ended with reward {total_reward}")
+                        reward_arr[episode] = total_reward
                         T=t+1
                     else:
                         action = epsilon_greedy(env, epsilon, q_table, state)

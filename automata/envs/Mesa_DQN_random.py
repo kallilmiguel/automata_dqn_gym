@@ -5,16 +5,13 @@ import os
 import time
 import torch 
 import torch.optim as optim
-import torch.nn as nn
 import numpy as np
 import csv
-import pandas as pd
 from lib import agent_buffer
 from lib import dqn_model
-import seaborn as sns
-import matplotlib.pyplot as plt
+
+
 from operator import itemgetter
-import ptan
 from tensorboardX import SummaryWriter
 import argparse 
 
@@ -26,7 +23,7 @@ def parse_args():
     parser.add_argument('--batch_size', type=int, default=128, help="Batch size (use higher if you have enough VRAM)")
     parser.add_argument('--lr', type=float, default=1e-4, help="Learning rate of training")
     parser.add_argument('--sync_target_frames', type=int, default=1e3, help="Number of steps for synchronization between both networks")
-    parser.add_argument('--episodes', type=int, default=1000, help="Learning rate of training")
+    parser.add_argument('--episodes', type=int, default=200, help="Learning rate of training")
     parser.add_argument('--eps_decay', type=int, default=15000)
     parser.add_argument('--gpu', type=int, default=0, help="Specify which GPU to use")
     parser.add_argument('--case', type=int, default=9)
