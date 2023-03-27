@@ -1,4 +1,4 @@
-name: DRLLapam
+name: automata_dqn_gym
 channels:
   - defaults
 dependencies:
