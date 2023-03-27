@@ -1,1 +1,4 @@
 automata/__pycache__
+automata/envs/__pycache__
+automata/envs/runs/*
+*desktop*
